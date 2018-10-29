@@ -1,0 +1,47 @@
+# The name of this application, which must be unique within a project.
+name: 'redaxo_platformsh_demo'
+# The type key specifies the language and version for your application.
+type: 'php:7.1'
+
+# On PHP, there are multiple build flavors available. Pretty much everyone
+# except Drupal 7 users will want the composer flavor.
+# build:
+# flavor: composer
+
+# The relationships of the application with services or other applications.
+# The left-hand side is the name of the relationship as it will be exposed
+# to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
+# side is in the form `<service name>:<endpoint name>`.
+relationships:
+    database: 'mysqldb:mysql'
+
+
+# The size of the persistent disk of the application (in MB).
+disk: 2048
+
+# The 'mounts' describe writable, persistent filesystem mounts in the application.
+# The keys are directory paths relative to the application root. The values are a
+# mount definition. In this case, `web-files` is just a unique name for the mount.
+mounts:
+    'redaxo/cache':
+        source: local
+        source_path: 'redaxo-caches'
+    'redaxo/data':
+        source: local
+        source_path: 'redaxo-data'
+    'assets/':
+        source: local
+        source_path: 'redaxo-assets'
+    'media/':
+        source: local
+        source_path: 'frontend-media'
+
+# The configuration of the application when it is exposed to the web.
+web:
+    locations:
+        '/':
+            # The public directory of the application relative to its root.
+            # root: 'web'
+            # The front-controller script which determines where to send
+            # non-static requests.
+            passthru: '/index.php'

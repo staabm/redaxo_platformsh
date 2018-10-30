@@ -207,6 +207,50 @@
         ]
     },
     {
+        "name": "platformsh/config-reader",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/platformsh/platformsh-config-reader-php.git",
+            "reference": "f985ff0b4eab1c81651ccae3aed62d76b7506be9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/platformsh/platformsh-config-reader-php/zipball/f985ff0b4eab1c81651ccae3aed62d76b7506be9",
+            "reference": "f985ff0b4eab1c81651ccae3aed62d76b7506be9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2018-01-12T17:50:23+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Platformsh\\ConfigReader\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Patrick Dawkins"
+            },
+            {
+                "name": "Ori Pekelman",
+                "email": "ori+github@pekelman.com"
+            }
+        ],
+        "description": "Small helper to access Platform.sh environment variables"
+    },
+    {
         "name": "psr/log",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
@@ -259,17 +303,6 @@
         "name": "roave/security-advisories",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Roave/SecurityAdvisories.git",
-            "reference": "79ef6566b9c7fe6c1b6f6d12e5729d5cb545ac69"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/79ef6566b9c7fe6c1b6f6d12e5729d5cb545ac69",
-            "reference": "79ef6566b9c7fe6c1b6f6d12e5729d5cb545ac69",
-            "shasum": ""
-        },
         "conflict": {
             "3f/pygmentize": "<1.2",
             "adodb/adodb-php": "<5.20.12",

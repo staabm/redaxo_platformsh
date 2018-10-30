@@ -73,6 +73,8 @@ class rex_sql implements Iterator
 
         try {
             if (!isset(self::$pdo[$DBID])) {
+				$config = new \Platformsh\ConfigReader\Config();
+				
 				// check for a platform.sh ENV based config
 				if ($config->isAvailable()) {
 					$conn = self::createConnection(

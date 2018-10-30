@@ -32,6 +32,9 @@ mounts:
     'public/media':
         source: local
         source_path: 'frontend-media'
+    'public/assets':
+        source: local
+        source_path: 'frontend-assets'
 
 # The configuration of the application when it is exposed to the web.
 web:

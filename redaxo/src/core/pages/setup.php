@@ -111,6 +111,7 @@ if ($step == 3) {
 
     $security = '<div class="rex-js-setup-security-message" style="display:none">' . rex_view::error(rex_i18n::msg('setup_security_msg') . '<br />' . rex_i18n::msg('setup_no_js_security_msg')) . '</div>';
     $security .= '<noscript>' . rex_view::error(rex_i18n::msg('setup_no_js_security_msg')) . '</noscript>';
+	/*
     $security .= '<script>
 
     jQuery(function($){
@@ -135,6 +136,7 @@ if ($step == 3) {
     })
 
     </script>';
+	*/
 
     if (!rex_request::isHttps()) {
         $security .= rex_view::warning(rex_i18n::msg('setup_security_no_https'));

@@ -23,16 +23,13 @@ disk: 2048
 # The keys are directory paths relative to the application root. The values are a
 # mount definition. In this case, `web-files` is just a unique name for the mount.
 mounts:
-    'redaxo/cache':
+    'var/cache':
         source: local
         source_path: 'redaxo-caches'
-    'redaxo/data':
+    'var/data':
         source: local
         source_path: 'redaxo-data'
-    'assets/':
-        source: local
-        source_path: 'redaxo-assets'
-    'media/':
+    'public/media':
         source: local
         source_path: 'frontend-media'
 
@@ -41,7 +38,7 @@ web:
     locations:
         '/':
             # The public directory of the application relative to its root.
-            root: ''
+            root: 'public'
             # The front-controller script which determines where to send
             # non-static requests.
             passthru: '/index.php'

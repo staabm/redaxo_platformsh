@@ -1,0 +1,4 @@
+- yak setup basis
+- composer require platformsh/config-reader
+- rex_sql gepatched https://github.com/staabm/redaxo_platformsh/commit/20f12a86643eeeb9768c6146f47da50ced5be65f
+- rex_setup gepatched https://github.com/staabm/redaxo_platformsh/commit/e67e84cb0f7fea5e2e206511ee757b9dc112f75d

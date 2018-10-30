@@ -1,0 +1,20 @@
+package: url
+version: '1.0.1'
+author: Thomas Blum
+supportpage: www.redaxo.org/de/forum/
+
+page:
+    title: 'translate:url'
+    perm: admin[]
+    pjax: false
+    icon: rex-icon fa fa-anchor
+    subpages:
+        generate:
+            title: 'translate:generate'
+
+requires:
+    redaxo: ^5.3.0
+    packages:
+        yrewrite: ^2.2.0
+
+#load: late

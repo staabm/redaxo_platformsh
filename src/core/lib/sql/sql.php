@@ -70,33 +70,17 @@ class rex_sql implements Iterator
     protected function selectDB($DBID)
     {
         $this->DBID = $DBID;
-
         try {
             if (!isset(self::$pdo[$DBID])) {
-				$config = new \Platformsh\ConfigReader\Config();
-				
-				// check for a platform.sh ENV based config
-				if ($config->isAvailable()) {
-					$conn = self::createConnection(
-						$config->relationships['database'][$DBID]['host'],
-						$config->relationships['database'][$DBID]['path'],
-						$config->relationships['database'][$DBID]['username'],
-						$config->relationships['database'][$DBID]['password'],
-						false
-					);
-				// a config.yml based config
-				} else {
-					$dbconfig = rex::getProperty('db');
-					$conn = self::createConnection(
-						$dbconfig[$DBID]['host'],
-						$dbconfig[$DBID]['name'],
-						$dbconfig[$DBID]['login'],
-						$dbconfig[$DBID]['password'],
-						$dbconfig[$DBID]['persistent']
-					);
-				}
+                $dbconfig = rex::getProperty('db');
+                $conn = self::createConnection(
+                    $dbconfig[$DBID]['host'],
+                    $dbconfig[$DBID]['name'],
+                    $dbconfig[$DBID]['login'],
+                    $dbconfig[$DBID]['password'],
+                    $dbconfig[$DBID]['persistent']
+                );
                 self::$pdo[$DBID] = $conn;
-
                 // ggf. Strict Mode abschalten
                 $this->setQuery('SET SESSION SQL_MODE="", NAMES utf8mb4');
             }
@@ -118,6 +102,16 @@ class rex_sql implements Iterator
     {
         if (!$database) {
             throw new InvalidArgumentException('Database name can not be empty.');
+        }
+
+        $config = new \Platformsh\ConfigReader\Config();
+
+        // check for a platform.sh ENV based config
+        if ($config->isAvailable()) {
+            $host = $config->relationships['database'][0]['host'];
+            $database = $config->relationships['database'][0]['path'];
+            $login = $config->relationships['database'][0]['username'];
+            $password = $config->relationships['database'][0]['password'];
         }
 
         $dsn = 'mysql:host=' . $host . ';dbname=' . $database;

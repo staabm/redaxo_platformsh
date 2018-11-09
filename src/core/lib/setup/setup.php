@@ -79,7 +79,7 @@ class rex_setup
             rex_path::assets(),
             rex_path::cache(),
             rex_path::data(),
-            rex_path::src(),
+            // rex_path::src(),
         ];
 
         $getMod = function ($path) {

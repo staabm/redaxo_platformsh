@@ -35,7 +35,6 @@ class ComposerStaticInitRedaxoCore
         'P' => 
         array (
             'Psr\\Log\\' => 8,
-            'Platformsh\\ConfigReader\\' => 24,
         ),
     );
 
@@ -84,10 +83,6 @@ class ComposerStaticInitRedaxoCore
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Platformsh\\ConfigReader\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/platformsh/config-reader/src',
-        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -112,7 +107,6 @@ class ComposerStaticInitRedaxoCore
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
         'ParsedownExtra' => __DIR__ . '/..' . '/erusev/parsedown-extra/ParsedownExtra.php',
-        'Platformsh\\ConfigReader\\Config' => __DIR__ . '/..' . '/platformsh/config-reader/src/Config.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',

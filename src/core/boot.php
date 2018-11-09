@@ -80,7 +80,7 @@ require_once rex_path::core('functions/function_rex_globals.php');
 require_once rex_path::core('functions/function_rex_other.php');
 
 // ----------------- VERSION
-rex::setProperty('version', '5.6.4');
+rex::setProperty('version', '5.7.0-beta1');
 
 $cacheFile = rex_path::coreCache('config.yml.cache');
 $configFile = rex_path::coreData('config.yml');
@@ -102,10 +102,7 @@ foreach ($config as $key => $value) {
 
 date_default_timezone_set(rex::getProperty('timezone', 'Europe/Berlin'));
 
-if (!rex::isSetup()) {
-    rex_error_handler::register();
-}
-
+rex_error_handler::register();
 rex_var_dumper::register();
 
 // ----------------- REX PERMS
@@ -129,6 +126,23 @@ if ('cli' !== PHP_SAPI && !rex::isSetup()) {
     if (true === rex::getProperty('use_hsts') && rex_request::isHttps()) {
         rex_response::setHeader('Strict-Transport-Security', 'max-age=31536000');
     }
+}
+
+// ----------------- Minibar
+rex_minibar::getInstance()->addElement(new rex_minibar_element_system());
+rex_minibar::getInstance()->addElement(new rex_minibar_element_time());
+
+if (!rex::isBackend()) {
+    rex_extension::register('OUTPUT_FILTER', function (rex_extension_point $ep) {
+        $minibar = rex_minibar::getInstance()->get();
+        if ($minibar) {
+            $ep->setSubject(str_replace(
+                ['</head>', '</body>'],
+                ['<link rel="stylesheet" type="text/css" href="' . rex_addon::get('be_style')->getAssetsUrl('css/minibar.css') .'" /></head>', $minibar . '</body>'],
+                $ep->getSubject())
+            );
+        }
+    });
 }
 
 if (isset($REX['LOAD_PAGE']) && $REX['LOAD_PAGE']) {

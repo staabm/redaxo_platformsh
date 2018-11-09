@@ -110,12 +110,7 @@ class rex_setup_importer
         $err_msg = '';
 
         // Prüfen, welche Tabellen bereits vorhanden sind
-        $existingTables = [];
-        foreach (rex_sql::showTables() as $tblname) {
-            if (substr($tblname, 0, strlen(rex::getTablePrefix())) == rex::getTablePrefix()) {
-                $existingTables[] = $tblname;
-            }
-        }
+        $existingTables = rex_sql::factory()->getTables(rex::getTablePrefix());
 
         foreach (array_diff(self::getRequiredTables(), $existingTables) as $missingTable) {
             $err_msg .= rex_i18n::msg('setup_502', $missingTable) . '<br />';
@@ -192,14 +187,14 @@ class rex_setup_importer
             }
 
             if ($state !== true) {
-                $addonErr .= '<li>' . htmlspecialchars($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
+                $addonErr .= '<li>' . rex_escape($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
             }
 
             if ($state === true && !$package->isAvailable()) {
                 $state = $manager->activate();
 
                 if ($state !== true) {
-                    $addonErr .= '<li>' . htmlspecialchars($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
+                    $addonErr .= '<li>' . rex_escape($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
                 }
             }
         }
@@ -231,7 +226,7 @@ class rex_setup_importer
             $manager = rex_package_manager::factory($package);
 
             if (!$manager->install()) {
-                $error .= '<li>' . htmlspecialchars($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
+                $error .= '<li>' . rex_escape($package->getPackageId()) . '<ul><li>' . $manager->getMessage() . '</li></ul></li>';
             }
         }
 

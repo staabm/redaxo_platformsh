@@ -36,6 +36,13 @@ mounts:
         source: local
         source_path: 'frontend-assets'
 
+# The hooks that will be triggered when the package is deployed.
+hooks:
+    # Build hooks can modify the application files on disk but not access any services like databases.
+    build: |
+        set -e
+        php .platform/rex_db_options.php
+
 # The configuration of the application when it is exposed to the web.
 web:
     locations:

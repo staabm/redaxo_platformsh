@@ -41,7 +41,7 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
-        php .platform/rex_db_options.php
+        php rex_db_options.php
 
 # The configuration of the application when it is exposed to the web.
 web:

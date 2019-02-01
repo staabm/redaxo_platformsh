@@ -42,17 +42,10 @@ hooks:
     build: |
         set -e
 
-        if [ ! -f var/data/core/config.yml ]; then
-            curl -sS https://platform.sh/cli/installer | php
-            source ~/.environment
-
-            mkdir -p var/data/core/
-            cp src/core/default.config.yml var/data/core/config.yml
-            php rex_db_options.php
-            platform sql < src/core/install.sql
-        fi
-        
+        mkdir -p var/data/core/
+        cp src/core/default.config.yml var/data/core/config.yml
         php rex_db_options.php
+        mysql -h database.internal -P 3306 -u user main < src/core/install.sql
 
 # The configuration of the application when it is exposed to the web.
 web:

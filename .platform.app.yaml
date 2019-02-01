@@ -45,7 +45,7 @@ hooks:
         mkdir -p var/data/core/
         cp src/core/default.config.yml var/data/core/config.yml
         php rex_db_options.php
-        platform db:sql < src/core/install.sql
+        platform sql < src/core/install.sql
 
 # The configuration of the application when it is exposed to the web.
 web:

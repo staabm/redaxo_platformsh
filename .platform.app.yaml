@@ -41,7 +41,9 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
+        cp src/core/default.config.yml var/data/core/config.yml
         php rex_db_options.php
+        mysql -h mysqldb.internal -P 3306 -u user main < src/core/install.sql
 
 # The configuration of the application when it is exposed to the web.
 web:

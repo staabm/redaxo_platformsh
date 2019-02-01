@@ -42,6 +42,8 @@ hooks:
     build: |
         set -e
         curl -sS https://platform.sh/cli/installer | php
+        source ~/.environment
+        
         mkdir -p var/data/core/
         cp src/core/default.config.yml var/data/core/config.yml
         php rex_db_options.php

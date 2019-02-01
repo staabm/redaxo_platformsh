@@ -41,13 +41,18 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
-        curl -sS https://platform.sh/cli/installer | php
-        source ~/.environment
+
+        if [ ! -f var/data/core/config.yml ]; then
+            curl -sS https://platform.sh/cli/installer | php
+            source ~/.environment
+
+            mkdir -p var/data/core/
+            cp src/core/default.config.yml var/data/core/config.yml
+            php rex_db_options.php
+            platform sql < src/core/install.sql
+        fi
         
-        mkdir -p var/data/core/
-        cp src/core/default.config.yml var/data/core/config.yml
         php rex_db_options.php
-        platform sql < src/core/install.sql
 
 # The configuration of the application when it is exposed to the web.
 web:

@@ -42,10 +42,14 @@ hooks:
     build: |
         set -e
 
+        # create initial config
         mkdir -p var/data/core/
         cp src/core/default.config.yml var/data/core/config.yml
+        # setup db credentials
         php rex_db_options.php
-        mysql -h database.internal -P 3306 -u user main < src/core/install.sql
+        
+        php bin/console setup:db
+        php bin/console user:create demo redaxodemo 1
 
 # The configuration of the application when it is exposed to the web.
 web:

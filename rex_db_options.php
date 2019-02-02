@@ -15,3 +15,4 @@ if ($relationships) {
 		system($cmd);		
     }
 }
+var_dump($relationships);

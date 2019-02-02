@@ -9,10 +9,14 @@ if ($relationships) {
         if (empty($endpoint['query']['is_master'])) {
             continue;
         }
-		
-		$cmd = "php bin/console db:set-connection-options --host=". $endpoint['host'] ." --login=". $endpoint['username'] ." --password=". $endpoint['password'] ." --database=". $endpoint['path'];
-        echo $cmd;
-		system($cmd);		
+        $cmd = sprintf(
+            'php bin/console db:set-connection-options --host=%s:%s --login=%s --password=%s --database=%s',
+            $endpoint['host'],
+            $endpoint['port'],
+            $endpoint['username'],
+            $endpoint['password'],
+            $endpoint['path']
+        );
+        system($cmd);
     }
 }
-var_dump($relationships);

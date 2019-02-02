@@ -20,6 +20,8 @@ class rex_console_command_loader implements CommandLoaderInterface
             'db:connection-options' => rex_command_db_connection_options::class,
             'db:set-connection-options' => rex_command_db_set_connection_options::class,
             'setup:check' => rex_command_setup_check::class,
+            'setup:db' => rex_command_setup_db::class,
+            'user:create' => rex_command_user_create::class,
         ];
 
         if (!rex::isSetup()) {

@@ -5,7 +5,7 @@
 $relationships = getenv('PLATFORM_RELATIONSHIPS');
 if ($relationships) {
     $relationships = json_decode(base64_decode($relationships), true);
-    foreach ($relationships['mysqldb'] as $endpoint) {
+    foreach ($relationships['database'] as $endpoint) {
         if (empty($endpoint['query']['is_master'])) {
             continue;
         }

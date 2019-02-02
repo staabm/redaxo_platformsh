@@ -47,7 +47,7 @@ hooks:
         cp src/core/default.config.yml var/data/core/config.yml
         # setup db credentials
         php rex_db_options.php
-        
+
         php bin/console setup:db
         php bin/console user:create demo redaxodemo 1
 

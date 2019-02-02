@@ -29,7 +29,7 @@ class rex_command_setup_db extends rex_console_command
             if (!file_exists($configFile)) {
                 throw new Exception(sprintf('Missing required config file "%s" containing db connection settings', $configFile));
             }
-            
+
             // bootstrap addons, to load all required classes for the setup
             require_once rex_path::core('packages.php');
 

@@ -25,8 +25,15 @@ class rex_command_setup_db extends rex_console_command
         if (rex::isSetup()) {
             $err = '';
 
-            // read initial config
             $configFile = rex_path::coreData('config.yml');
+            if (!file_exists($configFile)) {
+                throw new Exception(sprintf('Missing required config file "%s" containing db connection settings', $configFile));
+            }
+            
+            // bootstrap addons, to load all required classes for the setup
+            require_once rex_path::core('packages.php');
+
+            // read initial config
             $config = array_merge(
                 rex_file::getConfig(rex_path::core('default.config.yml')),
                 rex_file::getConfig($configFile)

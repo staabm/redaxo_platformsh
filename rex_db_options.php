@@ -11,6 +11,7 @@ if ($relationships) {
         }
 		
 		$cmd = "php bin/console db:set-connection-options --host=". $endpoint['host'] ." --login=". $endpoint['username'] ." --password=". $endpoint['password'] ." --database=". $endpoint['path'];
+        echo $cmd;
 		system($cmd);		
     }
 }

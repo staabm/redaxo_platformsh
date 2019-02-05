@@ -48,7 +48,7 @@ hooks:
         # setup db credentials
         php rex_db_options.php
 
-        php bin/console setup:db
+        php bin/console setup:db override-existing
         php bin/console user:create demo redaxodemo 1
 
 # The configuration of the application when it is exposed to the web.

@@ -2,7 +2,7 @@
 
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -14,12 +14,21 @@ class rex_command_setup_db extends rex_console_command
 {
     protected function configure()
     {
-        $this->setDescription('Initial setup the database');
+        $this
+            ->setDescription('Initial setup the database')
+            ->addArgument('mode', InputArgument::REQUIRED, "'create-empty' or 'override-existing'")
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = $this->getStyle($input, $output);
+
+        $mode = $input->getArgument('mode');
+
+        if (!in_array($mode, ['create-empty', 'override-existing'])) {
+            throw new InvalidArgumentException(sprintf('Invalid mode %s given', $mode));
+        }
 
         // run setup, if instance not already prepared
         if (rex::isSetup()) {
@@ -41,8 +50,18 @@ class rex_command_setup_db extends rex_console_command
 
             // init db
             $err .= rex_setup::checkDb($config, false);
-            $err .= rex_setup_importer::prepareEmptyDb();
-            $err .= rex_setup_importer::verifyDbSchema();
+
+            if ('' === $err) {
+                if ($mode == 'create-empty') {
+                    $err .= rex_setup_importer::prepareEmptyDb();
+                } elseif ($mode == 'override-existing') {
+                    $err .= rex_setup_importer::overrideExisting();
+                }
+            }
+
+            if ('' === $err) {
+                $err .= rex_setup_importer::verifyDbSchema();
+            }
 
             if ($err != '') {
                 $io->error($err);

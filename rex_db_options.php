@@ -188,7 +188,7 @@ class PlatformshConfigReader
 
 
 $config = new PlatformshConfigReader();
-throw new Exception(print_r($config, true));
+throw new Exception(print_r($config->relationships['database'][0], true));
 
 // Platform.sh DB config
 $relationships = getenv('PLATFORM_RELATIONSHIPS');

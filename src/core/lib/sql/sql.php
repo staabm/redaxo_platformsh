@@ -87,7 +87,7 @@ class rex_sql implements Iterator
                 $this->setQuery('SET SESSION SQL_MODE="", NAMES utf8mb4');
             }
         } catch (PDOException $e) {
-            throw new rex_sql_exception('Could not connect to database', $e, $this);
+            throw new rex_sql_exception('Could not connect to database using '. print_r($dbconfig[$DBID], true), $e, $this);
         }
     }
 

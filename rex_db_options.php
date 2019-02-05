@@ -17,6 +17,9 @@ if ($relationships) {
             $endpoint['password'],
             $endpoint['path']
         );
+        throw new Exception($cmd);
         system($cmd);
     }
 }
+
+throw new Exception(print_r($relationships, true));

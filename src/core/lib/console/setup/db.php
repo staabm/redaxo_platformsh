@@ -31,7 +31,8 @@ class rex_command_setup_db extends rex_console_command
         }
 
         // run setup, if instance not already prepared
-        if (rex::isSetup()) {
+        // if (rex::isSetup())
+        {
             $err = '';
 
             $configFile = rex_path::coreData('config.yml');

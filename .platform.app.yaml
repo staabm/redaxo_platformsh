@@ -39,7 +39,7 @@ mounts:
 hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     deploy: |
-        #set -e
+        set -e
 
         # create initial config
         mkdir -p var/data/core/

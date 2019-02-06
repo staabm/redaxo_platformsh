@@ -187,8 +187,8 @@ class PlatformshConfigReader
 }
 
 
-$config = new PlatformshConfigReader();
-throw new Exception(print_r($config->relationships['database'][0], true));
+//$config = new PlatformshConfigReader();
+//throw new Exception(print_r($config->relationships['database'][0], true));
 
 // Platform.sh DB config
 $relationships = getenv('PLATFORM_RELATIONSHIPS');
@@ -206,9 +206,9 @@ if ($relationships) {
             $endpoint['password'],
             $endpoint['path']
         );
-        throw new Exception($cmd);
+        //throw new Exception($cmd);
         system($cmd);
     }
 }
 
-throw new Exception(print_r($relationships, true));
+//throw new Exception(print_r($relationships, true));
